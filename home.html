@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home Page</title>
+  <style>
+    body {
+      margin: 20px auto;
+      font-family: 'Lato';
+      background: #666;
+      color: #fff;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    
+    .body {
+      font-family: Arial, sans-serif;
+    }
+    
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 20px;
+      background-color: #a98f8f;
+    }
+    
+    .company-name {
+      font-size: 24px;
+      font-weight: bold;
+    }
+    
+    .register-logout button {
+      padding: 10px 20px;
+      margin-left: 0px;
+      justify-content: right;
+    }
+    
+    .register-logout button:first-child {
+      margin-left: 0;
+    }
+    
+    .Search {
+      display: flex;
+      flex-wrap: wrap; /* Added to allow flex items to wrap on smaller screens */
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      background-color: #b79b9b;
+    }
+    
+    .search-box input {
+      padding: 5px;
+      width: 100%; /* Make the input take full width on smaller screens */
+      margin-bottom: 10px; /* Add some space below the input */
+    }
+    
+    .view-section a {
+      align-items: center;
+      margin: 0 5px;
+      color: #000;
+    }
+    
+    .view-section a:hover {
+      text-decoration: underline;
+    }
+    
+    .sorted-by select {
+      padding: 10px 20px;
+      margin-left: 0px;
+      justify-content: right;
+    }
+    
+    h2 {
+      font-weight: bold;
+      font-size: 2rem;
+    }
+    
+    p {
+      font-family: 'Reenie Beanie';
+      font-size: 2rem;
+    }
+    
+    ul,
+    li {
+      list-style: none;
+    }
+    
+    ul {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    
+    ul li a {
+      text-decoration: none;
+      color: #000;
+      background: #ffc;
+      display: block;
+      height: 10em;
+      width: 10em;
+      padding: 1em;
+      box-shadow: 5px 5px 7px rgba(33, 33, 33, 0.7);
+      transform: rotate(-6deg);
+      transition: transform 0.15s linear;
+    }
+    
+    /* Media query for screens smaller than 600px */
+    @media only screen and (max-width: 600px) {
+      .header {
+        flex-direction: column;
+      }
+    
+      .register-logout button {
+        width: 100%; /* Make buttons take full width on smaller screens */
+        margin-bottom: 10px; /* Add some space below the buttons */
+      }
+    
+      .Search {
+        flex-direction: column;
+      }
+    
+      .view-section,
+      .sorted-by {
+        width: 100%;
+      }
+    
+      ul li a {
+        width: 100%;
+        margin-bottom: 10px;
+      }
+    }
+    
+  </style>
+  <!-- Include jQuery library -->
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+<body>
+    <!--Navbar-->
+    <div class="header">
+        <div class="company-name">
+          sticky Note
+        </div>
+        <div class="navbar-links">
+          <a href="index.html">Home</a> <!-- Link to your home page -->
+          <a href="register.html">Register</a> <!-- Link to the registration page -->
+          <a href="logout.html"  id="logoutLink">Logout</a> <!-- Link to the login page -->
+        </div>
+      </div>
+
+
+      <!--Search-->
+
+      <div class="Search" id="Search">
+        <div class="search-box">
+          <input type="text" placeholder="Search...">
+        </div>
+        <div class="view-section">
+          View: <a href="#">All</a> | <a href="#">Favourites</a>
+        </div>
+        <div class="sorted-by">
+          Sorted by:
+          <select>
+            <option value="recent">Recent</option>
+            <option value="popular">Popular</option>
+            <option value="rating">Rating</option>
+          </select>
+        </div>
+      </div>
+<ul>
+  <li>
+    <a href="#" contenteditable>
+      <h2>Title #1</h2>
+      <p>Text Content #1</p>
+    </a>
+  </li>
+  <li>
+    <a href="#" contenteditable>
+      <h2>Title #2</h2>
+      <p>Text Content #2</p>
+    </a>
+  </li>
+  <li>
+    <a href="#" contenteditable>
+      <h2>Title #3</h2>
+      <p>Text Content #3</p>
+    </a>
+  </li>
+  <li>
+    <a href="#" contenteditable>
+      <h2>Title #4</h2>
+      <p>Text Content #4</p>
+    </a>
+  </li>
+  <li>
+    <a href="#" contenteditable>
+      <h2>Title #5</h2>
+      <p>Text Content #5</p>
+    </a>
+  </li>
+  <li>
+    <a href="#" contenteditable>
+      <h2>Title #6</h2>
+      <p>Text Content #6</p>
+    </a>
+  </li>
+  <li>
+    <a href="#" contenteditable>
+      <h2>Title #7</h2>
+      <p>Text Content #7</p>
+    </a>
+  </li>
+  <li>
+    <a href="#" contenteditable>
+      <h2>Title #8</h2>
+      <p>Text Content #8</p>
+    </a>
+  </li>
+</ul>
+
+<button id="addNote">Add Note</button>
+<button id="deleteNote">Delete Note</button>
+
+<script>
+  $(document).ready(function () {
+    all_notes = $("li a");
+
+    all_notes.on("keyup", function () {
+      note_title = $(this).find("h2").text();
+      note_content = $(this).find("p").text();
+
+      item_key = "list_" + $(this).parent().index();
+
+      data = {
+        title: note_title,
+        content: note_content
+      };
+
+      window.localStorage.setItem(item_key, JSON.stringify(data));
+    });
+
+    all_notes.each(function (index) {
+      data = JSON.parse(window.localStorage.getItem("list_" + index));
+
+      if (data !== null) {
+        note_title = data.title;
+        note_content = data.content;
+
+        $(this).find("h2").text(note_title);
+        $(this).find("p").text(note_content);
+      }
+    });
+
+    $("#addNote").on("click", function () {
+      // Add a new note
+      new_note = $("<li><a href='#' contenteditable><h2>Title</h2><p>Text Content</p></a></li>");
+      $("ul").append(new_note);
+      all_notes = $("li a");
+    });
+
+    $("#deleteNote").on("click", function () {
+      // Delete the last note
+      $("ul li:last-child").remove();
+      all_notes = $("li a");
+    });
+    document.getElementById('logoutLink').addEventListener('click', function(event) {
+      event.preventDefault(); // Prevent the default link behavior
+  
+      // Perform logout functionality here
+      alert('Logged out!');
+      
+      // You can add more logout actions if needed
+      
+      // Redirect to the logout page after performing logout actions
+      window.location.href = 'http://127.0.0.1:5500/?'; // Replace with your logout page URL
+  });
+  });
+</script>
+
+</body>
+</html>
